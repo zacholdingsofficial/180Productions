@@ -60,21 +60,21 @@ export default function App() {
     if (isLoading) return;
 
     let ctx = gsap.context(() => {
-      // Logo Swap
+      // Logo Swap: Now triggers exactly when the Story section enters the screen
       gsap.to(logoLightRef.current, {
         scrollTrigger: {
-          trigger: blackSectionRef.current,
-          start: "top 10%",
-          end: "top top",
+          trigger: storyTriggerRef.current,
+          start: "top 60%", // Triggers as the story section comes into view
+          end: "top 30%",
           scrub: true,
         },
         opacity: 0,
       });
       gsap.to(logoDarkRef.current, {
         scrollTrigger: {
-          trigger: blackSectionRef.current,
-          start: "top 10%",
-          end: "top top",
+          trigger: storyTriggerRef.current,
+          start: "top 60%",
+          end: "top 30%",
           scrub: true,
         },
         opacity: 1,
@@ -330,32 +330,37 @@ export default function App() {
                 </a>
               </div>
 
-              <p>Services Anywhere in India 📍</p>
+              <p>Services Anywhere in India</p>
               <p>Kerala, India</p>
             </div>
           </div>
 
-          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between border-t border-zinc-200 pt-8 relative gap-6 md:gap-0">
+          {/* Grid Layout for Bottom Footer - Prevents Overlapping */}
+          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 items-center border-t border-zinc-200 pt-8">
               
-              <div className="flex md:hidden items-center justify-center gap-4 mb-2">
-                <span className="text-red-600 font-black text-xs tracking-widest font-mono animate-pulse">A ZAC PRODUCT</span>
-                <span className="text-zinc-300">|</span>
-                <a href="https://wa.me/917558957246" target="_blank" rel="noreferrer" className="text-black hover:text-red-600 transition-colors italic font-serif text-base font-bold">R.</a>
+              {/* Left: Copyright */}
+              <div className="order-3 md:order-1 text-center md:text-left">
+                <p className="text-zinc-500 text-[10px] tracking-widest font-mono">
+                  © {new Date().getFullYear()} 180 Productions. All rights reserved.
+                </p>
               </div>
 
-              <p className="text-zinc-500 text-[10px] tracking-widest font-mono text-center md:text-left order-last md:order-first">
-                © {new Date().getFullYear()} 180 Productions. All rights reserved.
-              </p>
-
-              <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 items-center justify-center">
-                <span className="text-red-600 font-black text-sm tracking-[0.5em] font-mono animate-pulse drop-shadow-sm">
+              {/* Center: A ZAC PRODUCT */}
+              <div className="order-1 md:order-2 flex justify-center items-center gap-4 md:gap-0">
+                <span className="text-red-600 font-black text-xs md:text-sm tracking-[0.5em] font-mono animate-pulse drop-shadow-sm">
                   A ZAC PRODUCT
                 </span>
+                {/* Mobile version of R. link */}
+                <span className="text-zinc-300 md:hidden">|</span>
+                <a href="https://wa.me/917558957246" target="_blank" rel="noreferrer" className="text-black hover:text-red-600 transition-colors italic font-serif text-base font-bold md:hidden">R.</a>
               </div>
 
-              <a href="https://wa.me/917558957246" target="_blank" rel="noreferrer" className="hidden md:block text-black hover:text-red-600 transition-colors italic font-serif text-xl font-bold">
-                R.
-              </a>
+              {/* Right: Desktop version of R. link */}
+              <div className="order-2 md:order-3 hidden md:flex justify-end">
+                <a href="https://wa.me/917558957246" target="_blank" rel="noreferrer" className="text-black hover:text-red-600 transition-colors italic font-serif text-xl font-bold">
+                  R.
+                </a>
+              </div>
           </div>
         </footer>
       </div>
